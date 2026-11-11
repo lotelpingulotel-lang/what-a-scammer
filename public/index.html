@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>What a Scammer</title>
+<style>
+:root{--bg:#14121f;--sf:#221f35;--sf2:#2e2a47;--tx:#f5f3ff;--mu:#a9a3c7;--ac:#ffd23f;--pk:#ff4d8d;--gn:#3ddc97;--rd:#ff5a5f;--bl:#4d9bff;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:'Fredoka','Trebuchet MS',system-ui,sans-serif;min-height:100vh;padding-top:env(safe-area-inset-top,0)}
+#app{max-width:760px;margin:0 auto;padding:16px 16px 90px;animation:in .35s}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes wob{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes pop{0%{transform:scale(.4)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+h1{font-size:clamp(2.2rem,9vw,3.6rem);margin:8px 0;line-height:1;text-align:center;color:var(--ac);text-shadow:3px 3px 0 var(--pk)}
+h2{margin:6px 0}.c{text-align:center}.mu{color:var(--mu)}.logo{font-size:4rem;display:block;text-align:center;animation:wob 2s infinite}
+.box{background:var(--sf);border-radius:20px;padding:16px;margin:12px 0;border:2px solid var(--sf2)}
+button,input,select{font:inherit}
+button{background:var(--ac);color:#1b1630;border:0;border-radius:14px;padding:12px 18px;font-weight:700;cursor:pointer;box-shadow:0 4px 0 #b8901a;margin:4px;transition:transform .1s}
+button:hover{transform:translateY(-2px)}button:active{transform:translateY(3px);box-shadow:none}
+button.s{background:var(--sf2);color:var(--tx);box-shadow:0 4px 0 #0005}button.p{background:var(--pk);color:#fff;box-shadow:0 4px 0 #a0275a}
+button.g{background:var(--gn);box-shadow:0 4px 0 #1c8a5c}button:disabled{opacity:.4;pointer-events:none}
+input,select{background:var(--bg);color:var(--tx);border:2px solid var(--sf2);border-radius:12px;padding:10px 12px;width:100%}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center}.row>input{flex:1;min-width:120px;width:auto}
+.pl{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--sf2);border-radius:14px;margin:6px 0;animation:pop .3s}
+.pl .e{font-size:1.8rem}.pl .x{margin-left:auto}.off{opacity:.5}
+.code{font-size:3rem;letter-spacing:.3em;font-weight:700;color:var(--ac);text-align:center}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:12px 0}
+.card{background:var(--sf);border:3px solid var(--sf2);border-radius:20px;padding:14px;text-align:center;cursor:pointer;animation:pop .4s;transition:.15s}
+.card:hover{transform:translateY(-4px) rotate(-1deg);border-color:var(--ac)}.card.sel{border-color:var(--gn);background:var(--sf2)}
+.card .e{font-size:3.4rem}.card b{display:block}.card small{color:var(--mu)}.card.big{max-width:260px;margin:12px auto;cursor:default;font-size:1.1rem}.card.big .e{font-size:6rem;animation:wob 1.5s infinite}
+.role{text-align:center;padding:24px;border-radius:24px;animation:pop .5s}
+.role .e{font-size:5rem}.role.buyer{background:var(--bl);color:#fff}.role.seller{background:var(--gn);color:#073}.role.scammer{background:var(--rd);color:#fff}
+.tm{font-size:2.4rem;font-weight:700;text-align:center;color:var(--ac)}
+.tag{display:inline-block;padding:2px 10px;border-radius:99px;background:var(--sf2);font-size:.85rem}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:6px 4px;font-size:.9rem;color:var(--mu)}
+.win{font-size:3.5rem;text-align:center;animation:pop .6s}
+.chb{position:fixed;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0));z-index:20;box-shadow:0 4px 0 #b8901a,0 8px 20px #0006}
+.ch{position:fixed;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0));z-index:20;width:min(340px,94vw);height:min(55vh,420px);background:var(--sf);border:2px solid var(--ac);border-radius:20px;padding:10px;display:flex;flex-direction:column;box-shadow:0 10px 30px #0008;animation:pop .25s}
+.chh{display:flex;justify-content:space-between;align-items:center}.chh button{padding:2px 10px;box-shadow:none}
+#chl{flex:1;overflow-y:auto;margin:8px 0;display:flex;flex-direction:column;gap:6px}
+#chl .m{background:var(--sf2);padding:6px 10px;border-radius:12px;font-size:.9rem;word-break:break-word;max-width:90%}#chl .m.me{align-self:flex-end;background:var(--ac);color:#1b1630}
+#chl .m b{display:block;font-size:.75rem;opacity:.75}
+</style></head><body><div id="app"></div><div id="chat"></div>
+<script>
+/* ===== Daten ===== */
+const PR=[["📱","iPhone","Fast neu. Fast."],["🖥️","Gaming-PC","Läuft Crysis. Und Heizung."],["🎮","PlayStation","Mit Controller (ein Stick fehlt)"],["🕹️","Nintendo Switch","Drift inklusive"],["📺","Fernseher","65 Zoll, 2 Pixel tot"],["💻","Laptop","Akku hält 4 Minuten"],["🎁","Mystery-Box","Könnte ALLES sein"],["⌚","Luxus-Uhr","Sieht teuer aus"],["🥽","VR-Headset","Garantiert Übelkeit"],["🚲","E-Bike","Fährt nur bergab"],["📷","Kamera","Mit echtem Staub"],["🎧","Kopfhörer","Nur linkes Ohr"],["🧸","Riesen-Teddy","Beobachtet dich"],["🛋️","Sofa","Mit Geschichte"],["🎸","E-Gitarre","Von einem Rockstar*"],["🚁","Drohne","Kommt manchmal zurück"],["🧊","Kühlschrank","Brummt wie ein Bär"],["👟","Sneaker","Limitiert (1 Stück)"],["🤖","Staubsauger-Roboter","Hat Persönlichkeit"],["🖨️","Drucker","Druckt nur Fehler"],["🦆","Gummiente XXL","Wertanlage"],["🛴","E-Scooter","Bremsen optional"],["☕","Kaffeemaschine","Macht Lärm, manchmal Kaffee"],["🔮","Kristallkugel","Sagt: kauf mich"]];
+const EM=["🦊","🐸","🐙","🦄","🐼","🦖","🐵","🐧"];
+const ROLE={buyer:["🛒","Käufer","Kaufe bei allen ehrlichen Verkäufern – aber NIE beim Scammer!"],seller:["🏪","Verkäufer","Du bist ehrlich. Überzeuge den Käufer von deinem Produkt!"],scammer:["🦹","SCAMMER","Täusche den Käufer, bis er DEIN Produkt kauft. Lass dich nicht erwischen!"]};
+const LIES=[p=>`Dieses ${p} ist praktisch neu – nur einmal benutzt, von einer Oma!`,p=>`${p}? Gab's bei mir nie Probleme, ich schwöre auf meine Mutter!`,p=>`Nur heute: ${p} zum Spottpreis, TÜV-geprüft und handpoliert!`,p=>`Mein ${p} ist ein echtes Schnäppchen. Kein Kratzer, kein Defekt, versprochen!`];
+const CL=['Ich bin ehrlich, ich schwöre!','Mein Produkt war eindeutig das Beste.','Ich würde NIE betrügen. Wirklich nie.','Schaut euch den an, der benimmt sich verdächtig…','Ich habe einen Zeugen, dass meins top ist!'];
+/* ===== Zustand ===== */
+const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const KEY='was2';let cfg={id:'',name:'',em:EM[Math.random()*8|0],snd:true};
+try{Object.assign(cfg,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
+if(!cfg.id)cfg.id=(self.crypto&&crypto.randomUUID?crypto.randomUUID():Math.random().toString(36).slice(2)+Date.now().toString(36)).replace(/-/g,'');
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(cfg))}catch(e){}};save();
+let ws,S=null,pubs=[],scr='menu',msg='',selBuy=null,chOpen=false,chSeen=0,off=0,lastKey='',conn=false,pend=null;
+const tx=o=>{if(ws&&ws.readyState===1)ws.send(JSON.stringify(o))};
+const prof=()=>({name:cfg.name||'Spieler',em:cfg.em});
+const me=()=>S&&S.me, host=()=>S&&S.host===S.me;
+const nm=id=>{const p=S.players.find(x=>x.id===id);return p?`${E(p.em)} ${E(p.name)}`:'?'};
+/* ===== Sound ===== */
+let AC;function sfx(t){if(!cfg.snd)return;try{AC=AC||new AudioContext();const q={ok:[[523,.08],[659,.08],[784,.14]],bad:[[300,.15],[180,.3]],pop:[[640,.06]],win:[[523,.1],[659,.1],[784,.1],[1046,.3]],boing:[[200,.05],[420,.05],[300,.1]]}[t];let a=AC.currentTime;q.forEach(([f,d])=>{const o=AC.createOscillator(),g=AC.createGain();o.type='square';o.frequency.value=f;g.gain.value=.05;o.connect(g);g.connect(AC.destination);o.start(a);o.stop(a+d);a+=d})}catch(e){}}
+/* ===== Verbindung ===== */
+function connect(){ws=new WebSocket((location.protocol==='https:'?'wss://':'ws://')+location.host+'/ws');
+ ws.onopen=()=>{conn=true;tx({t:'hello',id:cfg.id,...prof()});
+  const h=location.hash.slice(1);if(/^[A-Za-z]{4}$/.test(h)){tx({t:'join',code:h,...prof()});history.replaceState(null,'',location.pathname)}
+  ui()};
+ ws.onmessage=e=>{let m;try{m=JSON.parse(e.data)}catch(x){return}
+  if(m.t==='state'){const o=S;S=m;off=m.now-Date.now();if(!o||o.phase!==m.phase||o.si!==m.si){phaseSfx(o)}
+   if(m.phase==='result'&&(!o||o.phase!=='result')){chOpen=true;chSeen=m.chat.length}
+   if(!o||o.phase!==m.phase||o.round!==m.round)selBuy=null;ui()}
+  else if(m.t==='pubs'){pubs=m.list;patch()}
+  else if(m.t==='err')flash(m.m);
+  else if(m.t==='left'){S=null;scr='menu';selBuy=null;chOpen=false;lastKey='';if(m.m)flash(m.m);ui()}};
+ ws.onclose=()=>{conn=false;ui();setTimeout(connect,1500)}}
+setInterval(()=>tx({t:'ping'}),20000);setInterval(()=>{if(!S)tx({t:'list'})},4000);
+function flash(m){msg=m;ui();setTimeout(()=>{msg='';ui()},3500)}
+function phaseSfx(o){const p=S.phase;if(p==='end'){const w=S.winner,r=S.role;sfx((w==='buyer')===(r==='buyer')&&r!=='seller'||(w==='buyer'&&r==='seller')?'win':'bad')}else sfx({roles:'boing',pick:'pop',pitch:'pop',buy:'boing',result:'ok'}[p]||'pop')}
+/* ===== Aktionen ===== */
+const A={
+ menu(){scr='menu';ui()},set(){scr='set';ui()},
+ create(d){tx({t:'create',pub:d.pub==='1',...prof()})},
+ solo(){tx({t:'solo',n:+($('#nb')||{value:4}).value,...prof()})},
+ joinc(){tx({t:'join',code:$('#jc').value,...prof()})},joinp(d){tx({t:'join',code:d.c,...prof()})},
+ copy(){try{navigator.clipboard.writeText(location.origin+'/#'+S.code)}catch(e){}flash('Einladungs-Link kopiert')},
+ leave(){tx({t:'leave'})},start(){tx({t:'start'})},addbot(){tx({t:'addbot'})},
+ kick(d){tx({t:'kick',id:d.id})},tp(){tx({t:'tp',v:$('#tps').value})},
+ emo(d){cfg.em=d.e;save();ui()},snd(){cfg.snd=!cfg.snd;save();sfx('pop');ui()},
+ pick(d){sfx('pop');tx({t:'pick',i:+d.i})},done(){sfx('ok');tx({t:'done'})},
+ sel(d){sfx('pop');selBuy=d.id;ui()},buy(){if(selBuy){sfx('boing');tx({t:'buy',id:selBuy})}},
+ again(){tx({t:'again'})},
+ lie(){const i=$('#pt');if(!i)return;const p=PR[S.picks[me()]][1];i.value=LIES[Math.random()*LIES.length|0](p);i.dispatchEvent(new Event('input',{bubbles:true}))},
+ lieChat(){const i=$('#chi');if(i){i.value=CL[Math.random()*CL.length|0];i.focus()}},
+ chx(){chOpen=!chOpen;if(chOpen&&S)chSeen=S.chat.length;chat();if(chOpen){const i=$('#chi');i&&i.focus()}},
+ chs(){const i=$('#chi'),v=i&&i.value.trim();if(!v)return;i.value='';tx({t:'chat',x:v});i.focus()}
+};
+document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(t&&A[t.dataset.a])A[t.dataset.a](t.dataset)});
+document.addEventListener('input',e=>{if(e.target.id==='nm'){cfg.name=e.target.value.slice(0,14);save()}
+ if(e.target.id==='pt'){clearTimeout(A._t);A._t=setTimeout(()=>tx({t:'pitch',x:e.target.value.slice(0,140)}),250)}});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'){if(e.target.id==='chi')A.chs();if(e.target.id==='jc')A.joinc()}});
+/* ===== UI ===== */
+const card=(i,x='',a='')=>{const p=PR[i];return`<div class="card ${x}" ${a}><div class="e">${p[0]}</div><b>${p[1]}</b><small>${p[2]}</small></div>`};
+const cardP=(i,h)=>{const p=PR[i];return`<div class="card big"><div class="e">${p[0]}</div><b>${p[1]}</b><small>${h?'❓ Zustand unbekannt – hör gut zu!':'Wahrheit: '+p[2]}</small></div>`};
+function ui(){const el=$('#app');if(!el)return;let key,h;
+ if(!S){key='m'+scr+cfg.em+cfg.snd+msg+conn;h=scr==='set'?viewSet():viewMenu()}
+ else{key=[S.phase,S.round,S.si,S.players.length,S.myPick,S.alive&&S.alive.length,selBuy,msg,conn,S.host,S.tp].join('|');h=viewGame()}
+ if(key!==lastKey){lastKey=key;el.innerHTML=h;el.style.animation='none';el.offsetWidth;el.style.animation=''}
+ patch()}
+function pubsHtml(){return pubs.length?pubs.map(r=>`<div class="pl"><span class="e">🎪</span><b>${E(r.code)}</b><span class="mu">${E(r.host||'')} · ${r.n}/8</span><button class="x g" data-a="joinp" data-c="${E(r.code)}">Rein!</button></div>`).join(''):'<p class="mu c">Gerade keine offenen Lobbys.</p>'}
+function patch(){const t=$('#tm');if(t&&S&&S.end)t.textContent=Math.max(0,Math.ceil((S.end-(Date.now()+off))/1000));
+ const pl=$('#pubs');if(pl)pl.innerHTML=pubsHtml();
+ const pt=$('#ptv');if(pt&&S&&S.order)pt.textContent=S.pts[S.order[S.si]]?'💬 '+S.pts[S.order[S.si]]:'';
+ chat()}
+setInterval(patch,250);
+function chat(){const el=$('#chat');if(!el)return;if(!S){el.innerHTML='';el.dataset.k='';return}
+ const n=S.chat.length,un=chOpen?0:Math.max(0,n-chSeen),k=S.code+chOpen+un;
+ if(el.dataset.k!==k){el.dataset.k=k;el.innerHTML=chOpen?'<div class="ch"><div class="chh"><b>💬 Chat</b><button class="s" data-a="chx">✕</button></div><div id="chl"></div><div class="row"><input id="chi" maxlength="120" placeholder="Nachricht…" autocomplete="off"><button data-a="chs">➤</button></div></div>':`<button class="chb" data-a="chx">💬 Chat${un?' ('+un+')':''}</button>`}
+ const l=$('#chl');if(chOpen)chSeen=n;
+ if(l&&l.dataset.n!=n){l.dataset.n=n;l.innerHTML=S.chat.map(m=>`<div class="m ${m.u===S.me?'me':''}"><b>${E(m.em)} ${E(m.name)}</b>${E(m.x)}</div>`).join('')||'<p class="mu c">Noch keine Nachrichten. Sag Hallo! 👋</p>';l.scrollTop=l.scrollHeight}}
+function viewMenu(){return`<span class="logo">🦹</span><h1>WHAT A SCAMMER</h1><p class="c mu">Wer ist der Betrüger? Online mit Freunden: Raum erstellen, Link teilen, los!</p>
+${msg?`<div class="box c" style="border-color:var(--pk)">${E(msg)}</div>`:''}
+${conn?'':'<div class="box c">Verbinde mit Server…</div>'}
+<div class="box"><input id="nm" placeholder="Dein Name" maxlength="14" value="${E(cfg.name)}"></div>
+<div class="box c"><div class="row"><button class="g" data-a="solo">🤖 Solo gegen Bots</button><span class="mu">Bots:</span><select id="nb" style="width:auto">${[3,4,5,6].map(n=>`<option ${n===4?'selected':''}>${n}</option>`).join('')}</select></div>
+<button data-a="create" data-pub="0">🔒 Privaten Raum erstellen</button><button class="p" data-a="create" data-pub="1">🌍 Öffentlichen Raum erstellen</button>
+<div class="row" style="margin-top:10px"><input id="jc" placeholder="CODE" maxlength="4" style="text-transform:uppercase;text-align:center"><button class="g" data-a="joinc">Beitreten</button></div></div>
+<div class="box"><h2>🔎 Offene Lobbys</h2><div id="pubs"></div></div>
+<div class="c"><button class="s" data-a="set">⚙️ Einstellungen</button></div>`}
+function viewSet(){return`<h1>⚙️</h1><div class="box"><h2>Name</h2><input id="nm" maxlength="14" value="${E(cfg.name)}"><h2>Avatar</h2><div class="row">${EM.map(e=>`<button class="${e===cfg.em?'':'s'}" data-a="emo" data-e="${e}">${e}</button>`).join('')}</div>
+<h2>Sound</h2><button class="${cfg.snd?'g':'s'}" data-a="snd">${cfg.snd?'🔊 An':'🔇 Aus'}</button>
+<h2>Voice</h2><p class="mu">Sprache läuft (noch) über einen parallelen Anruf (Discord, Meet …). Wer kein Mikro hat, tippt den Pitch ins Textfeld oder nutzt den Chat.</p></div><div class="c"><button data-a="menu">← Zurück</button></div>`}
+function viewGame(){const ph=S.phase,r=S.round,rl=S.role,R0=ROLE[rl]||[],mine=S.me;
+ const bar=`<div class="bar"><span>Raum ${S.code} ${rl?`<span class="tag">${R0[0]} ${R0[1]}</span>`:''}</span><span>Runde ${r||'-'}</span><button class="s" data-a="leave" style="padding:4px 10px;box-shadow:none">Raus</button></div>`;
+ if(ph==='lobby'){const n=S.players.length;return`${bar}<h1>LOBBY</h1><div class="box"><p class="c mu">${S.pub?'Öffentlicher':'Privater'} Raum – Einladungscode:</p><div class="code">${S.code}</div><div class="c"><button class="s" data-a="copy">📋 Link kopieren</button></div></div>
+ <div class="box"><h2>Spieler (${n}/8)</h2>${S.players.map(p=>`<div class="pl ${p.off?'off':''}"><span class="e">${E(p.em)}</span><b>${E(p.name)}</b>${p.id===S.host?'<span class="tag">👑 Host</span>':''}${p.bot?'<span class="tag">🤖 Bot</span>':''}${p.off?'<span class="tag">offline</span>':''}${host()&&p.id!==mine?`<button class="x s" data-a="kick" data-id="${p.id}" style="padding:4px 10px">Kick</button>`:''}</div>`).join('')}</div>
+ ${host()?`<div class="box c"><button class="s" data-a="addbot" ${n>=8?'disabled':''}>🤖 Bot hinzufügen</button> Redezeit: <select id="tps" onchange="A.tp()" style="width:auto">${[20,30,45].map(t=>`<option ${t===S.tp?'selected':''}>${t}</option>`).join('')}</select> s<br><button class="g" data-a="start" ${n<3?'disabled':''}>🚀 Spiel starten</button><p class="mu">Mindestens 3 Spieler (besser 5+). Lobbys mit nur einem Menschen werden nach 3 Minuten gelöscht.</p></div>`:'<p class="c mu">Warte auf den Host…</p>'}`}
+ if(ph==='roles')return`${bar}<div class="role ${rl}"><div class="e">${R0[0]}</div><h2>Du bist: ${R0[1]}</h2><p>${R0[2]}</p>${rl==='scammer'?'<p>🤫 Niemand weiß es. Lüg, was das Zeug hält!</p>':''}</div><div class="tm" id="tm"></div><p class="c mu">Zeig deinem Pokerface…</p>`;
+ if(ph==='pick'){if(rl==='buyer')return`${bar}<h2 class="c">🛒 Die Verkäufer wählen ihre Produkte…</h2><div class="tm" id="tm"></div><p class="c mu">Noch im Rennen: ${S.alive.length} Verkäufer</p>`;
+  if(!S.prod)return`${bar}<h2 class="c">👻 Du bist ausgeschieden</h2><div class="tm" id="tm"></div>`;
+  return`${bar}<h2 class="c">Wähle dein Produkt!</h2><div class="tm" id="tm"></div><div class="cards">${S.prod.map(i=>card(i,i===S.myPick?'sel':'',`data-a="pick" data-i="${i}"`)).join('')}</div>${rl==='scammer'?'<p class="c mu">🦹 Der Mangel steht auf der Karte – der Käufer sieht ihn nicht. Du darfst lügen!</p>':''}`}
+ if(ph==='pitch'){const sp=S.order[S.si],my=sp===mine;
+  return`${bar}<p class="c mu">Sprecher ${S.si+1} von ${S.order.length}</p><h2 class="c">${my?'🎤 DU bist dran!':nm(sp)+' pitcht…'}</h2><div class="tm" id="tm"></div>${cardP(S.picks[sp],rl==='buyer'&&!my)}<p class="c" id="ptv"></p>
+  ${my?`<div class="box">${rl==='scammer'?'<p class="c" style="color:var(--pk)">🦹 Du darfst LÜGEN! Verschweige den Mangel oder erfinde Vorteile.</p><div class="c"><button class="p" data-a="lie">🎲 Lügen-Idee</button></div>':''}<p class="mu c">🎙️ Sprich jetzt – oder tippe deinen Pitch:</p><input id="pt" maxlength="140" placeholder="Dieses Produkt ist einfach unschlagbar…"><div class="c"><button class="g" data-a="done">✅ Fertig</button></div></div>`:''}`}
+ if(ph==='buy'){if(rl!=='buyer')return`${bar}<h2 class="c">⏳ Der Käufer entscheidet…</h2><div class="tm" id="tm"></div><div class="c" style="font-size:4rem">🤔</div>`;
+  return`${bar}<h2 class="c">Wem vertraust du?</h2><div class="tm" id="tm"></div><div class="cards">${S.alive.map(i=>`<div class="card ${selBuy===i?'sel':''}" data-a="sel" data-id="${i}"><div class="e">${PR[S.picks[i]][0]}</div><b>${nm(i)}</b><small>${PR[S.picks[i]][1]}</small>${S.pts[i]?`<small>💬 ${E(S.pts[i])}</small>`:''}</div>`).join('')}</div><div class="c"><button class="p" data-a="buy" ${selBuy?'':'disabled'}>💸 KAUFEN</button></div>`}
+ if(ph==='result')return`${bar}<div class="win">✅</div><h2 class="c">${nm(S.last.ch)} war ein ehrlicher Verkäufer!</h2><p class="c mu">Ausgeschieden. Noch ${S.alive.length} Verkäufer übrig – einer davon ist der Scammer…</p>${S.last.why?`<p class="c mu">🤖 „${E(S.last.why)}“</p>`:''}
+  <div class="box c"><h2>💬 Zwischenrunde</h2><p>Diskutiert jetzt im Chat! Der Scammer darf lügen, die anderen dürfen verdächtigen. Nächste Runde in <b id="tm"></b> s</p>${rl==='scammer'?'<button class="p" data-a="lieChat">🎲 Lügen-Idee für den Chat</button>':''}</div>`;
+ if(ph==='end'){const bw=S.winner==='buyer';return`${bar}<div class="win">${bw?'🏆':'🦹'}</div><h1>${bw?'KÄUFER GEWINNT':'SCAMMER GEWINNT'}</h1><p class="c">${bw?'Alle ehrlichen Verkäufer gekauft – der Scammer ist enttarnt!':nm(S.last.ch)+' hat den Käufer gelinkt!'}</p>
+  <div class="box"><h2>Rollen</h2>${Object.keys(S.roles).map(i=>`<div class="pl"><span class="e">${ROLE[S.roles[i]][0]}</span><b>${nm(i)}</b><span class="tag x">${ROLE[S.roles[i]][1]}</span></div>`).join('')}</div>
+  <div class="c">${host()?'<button class="g" data-a="again">🔁 Nochmal spielen</button>':'<p class="mu">Der Host startet die nächste Runde…</p>'}<button class="s" data-a="leave">Verlassen</button></div>`}
+ return''}
+ui();connect();
+</script></body></html>
