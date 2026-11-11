@@ -1,0 +1,8 @@
+{
+  "name": "what-a-scammer",
+  "version": "1.0.0",
+  "description": "What a Scammer – Multiplayer Party-Game (Node.js, keine Abhängigkeiten)",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}
